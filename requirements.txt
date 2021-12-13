@@ -9,3 +9,4 @@ opencv-contrib-python-headless==4.5.3.56
 Pillow==4.3.0
 applicationinsights==0.11.1
 ptvsd==3.2.1
+gunicorn==20.1.0
