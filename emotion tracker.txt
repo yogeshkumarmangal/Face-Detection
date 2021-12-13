@@ -1,0 +1,39 @@
+/* clmtrackr libraries */
+<script src="js/clmtrackr.js"></script>
+<script src="js/model_pca_20_svm.js"></script>
+The following code initiates the clmtrackr with the model we included, and starts the tracker running on a video element.
+
+<video id="inputVideo" width="400" height="300" autoplay loop>
+  <source src="./media/somevideo.ogv" type="video/ogg"/>
+</video>
+<script type="text/javascript">
+  var videoInput = document.getElementById('inputVideo');
+
+  var ctracker = new clm.tracker();
+  ctracker.init(pModel);
+  ctracker.start(videoInput);
+</script>
+You can now get the positions of the tracked facial features as an array via getCurrentPosition():
+
+<script type="text/javascript">
+  function positionLoop() {
+    requestAnimationFrame(positionLoop);
+    var positions = ctracker.getCurrentPosition();
+    // positions = [[x_0, y_0], [x_1,y_1], ... ]
+    // do something with the positions ...
+  }
+  positionLoop();
+</script>
+You can also use the built in function draw() to draw the tracked facial model on a canvas :
+
+<canvas id="drawCanvas" width="400" height="300"></canvas>
+<script type="text/javascript">
+  var canvasInput = document.getElementById('canvas');
+  var cc = canvasInput.getContext('2d');
+  function drawLoop() {
+    requestAnimationFrame(drawLoop);
+    cc.clearRect(0, 0, canvasInput.width, canvasInput.height);
+    ctracker.draw(canvasInput);
+  }
+  drawLoop();
+</script>
